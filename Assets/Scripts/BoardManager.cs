@@ -121,25 +121,25 @@ public class BoardManager : MonoBehaviour
     // LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
     void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum)
     {
-        // Choose a random number of objects to instantiate within the minimum and maximum limits
+        // Choose a random number of objects to instantiate within the minimum and maximum limits.
         var objectCount = Random.Range (minimum, maximum+1);
         
-        // Instantiate objects until the randomly chosen limit objectCount is reached
+        // Instantiate objects until the randomly chosen limit objectCount is reached.
         for(var i = 0; i < objectCount; i++)
         {
-            // Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
+            // Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition.
             Vector3 randomPosition = RandomPosition();
             
-            // Choose a random tile from tileArray and assign it to tileChoice
+            // Choose a random tile from tileArray and assign it to tileChoice.
             GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
             
-            // Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
+            // Instantiate tileChoice at the position returned by RandomPosition with no change in rotation.
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
         }
     }
     
     
-    // SetupScene initializes our level and calls the previous functions to lay out the game board
+    // SetupScene initializes our level and calls the previous functions to lay out the game board.
     public void SetupScene (int level)
     {
         // Creates the outer walls and floor.
@@ -154,13 +154,13 @@ public class BoardManager : MonoBehaviour
         // Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
         
-        // Determine number of enemies based on current level number, based on a logarithmic progression
+        // Determine number of enemies based on current level number, based on a logarithmic progression.
         var enemyCount = (int)Mathf.Log(level, 2f);
         
         // Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
         
-        // Instantiate the exit tile in the upper right hand corner of our game board
+        // Instantiate the exit tile in the upper right hand corner of our game board.
         Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
     }
 }

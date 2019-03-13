@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         boardScript.SetupScene(level);
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         
