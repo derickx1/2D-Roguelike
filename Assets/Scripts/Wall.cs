@@ -7,7 +7,9 @@ using System.Collections;
         public Sprite dmgSprite;          
         // hit points for the wall.          
         public int hp = 4;                          
-        
+        public AudioClip chopSound1;
+        public AudioClip chopSound2;
+
         // Store a component reference to the attached SpriteRenderer.
         private SpriteRenderer spriteRenderer;      
         
@@ -22,6 +24,8 @@ using System.Collections;
         // DamageWall is called when the player attacks a wall.
         public void DamageWall (int loss)
         {   
+            SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
+            
             // Set spriteRenderer to the damaged wall sprite.
             spriteRenderer.sprite = dmgSprite;
             
