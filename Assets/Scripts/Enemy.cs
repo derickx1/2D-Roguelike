@@ -18,6 +18,7 @@ using System.Collections;
         // Start overrides the virtual Start function of the base class.
         protected override void Start ()
         {   
+            GameManager.instance.AddEnemyToList(this);
             // Get and store a reference to the attached Animator component.
             animator = GetComponent<Animator> ();
             

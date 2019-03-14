@@ -71,7 +71,7 @@ using UnityEngine.SceneManagement;
             {
                 // Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it).
                 // Pass in horizontal and vertical as parameters to specify the direction to move Player in.
-                // AttemptMove<Wall> (horizontal, vertical);
+                AttemptMove<Wall> (horizontal, vertical);
             }
         }
         
@@ -107,10 +107,10 @@ using UnityEngine.SceneManagement;
         protected override void OnCantMove <T> (T component)
         {
             // Set hitWall to equal the component passed in as a parameter.
-            // Wall hitWall = component as Wall;
+            Wall hitWall = component as Wall;
             
             // Call the DamageWall function of the Wall we are hitting.
-            // hitWall.DamageWall (wallDamage);
+            hitWall.DamageWall (wallDamage);
             
             // Set the attack trigger of the player's animation controller in order to play the player's attack animation.
             animator.SetTrigger ("playerChop");
