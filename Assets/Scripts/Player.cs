@@ -27,7 +27,8 @@ public class Player : MovingObject
     // Used to store a reference to the Player's animator component.
     private Animator animator;
     // Used to store player food points total during level.                  
-    private int food;                           
+    private int food;
+    private Vector2 touchOrigin = -Vector2.one;                           
     
     
     // Start overrides the Start function of MovingObject.
@@ -64,6 +65,7 @@ public class Player : MovingObject
         // Used to store the vertical move direction.     
         int vertical = 0;       
         
+    #if UNITY_STANDALONE || UNITY_WEBPLAYER
         
         // Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction.
         horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
@@ -76,6 +78,32 @@ public class Player : MovingObject
         {
             vertical = 0;
         }
+
+    #else
+
+        if (Input.touchCount > 0)
+        {
+            Touch myTouch = Input.touches[0];
+
+            if (myTouch.phase == TouchPhase.Began)
+            {
+                touchOrigin = myTouch.position;
+            }
+
+            else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x == 0)
+            {
+                Vector2 touchEnd = myTouch.position;
+                float x = touchEnd.x - touchOrigin.x;
+                float y = touchEnd.y - touchOrigin.y;
+                touchOrigin.x = -1;
+                if (Mathf.Abs(x) > Mathf.Abs(y))
+                    horizontal = x > 0 ? 1 : -1;
+                else
+                    vertical = y > 0 ? 1 : -1;
+            }
+        }
+        
+        #endif
         
         // Check if we have a non-zero value for horizontal or vertical.
         if((horizontal != 0) || (vertical != 0))
