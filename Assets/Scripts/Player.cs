@@ -28,7 +28,10 @@ public class Player : MovingObject
     private Animator animator;
     // Used to store player food points total during level.                  
     private int food;
-    private Vector2 touchOrigin = -Vector2.one;                           
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+    // Used to store location of screen touch origin for mobile controls.
+    private Vector2 touchOrigin = -Vector2.one;	
+#endif                        
     
     
     // Start overrides the Start function of MovingObject.
@@ -65,7 +68,7 @@ public class Player : MovingObject
         // Used to store the vertical move direction.     
         int vertical = 0;       
         
-    #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
         
         // Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction.
         horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
@@ -79,7 +82,7 @@ public class Player : MovingObject
             vertical = 0;
         }
 
-    #else
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHON
 
         if (Input.touchCount > 0)
         {
@@ -90,7 +93,7 @@ public class Player : MovingObject
                 touchOrigin = myTouch.position;
             }
 
-            else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x == 0)
+            else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
             {
                 Vector2 touchEnd = myTouch.position;
                 float x = touchEnd.x - touchOrigin.x;
@@ -206,7 +209,7 @@ public class Player : MovingObject
     private void Restart ()
     {
         // Load the last scene loaded, in this case Main, the only scene in the game.
-        SceneManager.LoadScene (0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
     
     
