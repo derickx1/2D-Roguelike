@@ -5,7 +5,7 @@ public class Wall : MonoBehaviour
 {             
     // Alternate sprite to display after Wall has been attacked by player. 
     public Sprite DmgSprite;          
-    // hit points for the wall.          
+    // Hit points for the wall.          
     public int HP = 5;                          
     public AudioClip ChopSound1;
     public AudioClip ChopSound2;

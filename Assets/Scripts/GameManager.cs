@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         enemies = new List<Enemy>();
         // Get a component reference to the attached BoardManager script.
         boardScript = GetComponent<BoardManager>();
+        // Get stored coins.
         Coins = PlayerPrefs.GetInt("Coins", 0);
     }
 
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
         #endif
     }
 
+    // Updates UpgradeWallDamageText.
     private void SetUpgradeDamageText() 
     {
         if (PlayerPrefs.GetInt("WallDamage", 1) < 5)
@@ -159,6 +161,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Updates UpgradeFoodText.
     private void SetUpgradeFoodText()
     {
         if (PlayerPrefs.GetInt("FoodDamage", 5) > 1)
@@ -171,6 +174,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Updates CoinText.
     private void SetCoinText() 
     {
         coinText.text = "\nCoins:" + PlayerPrefs.GetInt("Coins", 0);
@@ -188,6 +192,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Checks if Upgrade Food button is pressed.
     public void UpgradeFoodButton()
     {
         if ((PlayerPrefs.GetInt("Coins", 0) >= 5) && (PlayerPrefs.GetInt("FoodDamage", 5) > 1))
@@ -219,7 +224,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Player").GetComponent<Player>().UpdateStats();
     }
 
-    // Subtracts Coins by 5
+    // Subtracts Coins by 5.
     private void DecreaseCoin()
     {
         PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins", 0) - 5);
