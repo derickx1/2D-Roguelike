@@ -4,11 +4,11 @@ using System.Collections;
 public class Wall : MonoBehaviour
 {             
     // Alternate sprite to display after Wall has been attacked by player. 
-    public Sprite dmgSprite;          
+    public Sprite DmgSprite;          
     // hit points for the wall.          
-    public int hp = 4;                          
-    public AudioClip chopSound1;
-    public AudioClip chopSound2;
+    public int HP = 5;                          
+    public AudioClip ChopSound1;
+    public AudioClip ChopSound2;
 
     // Store a component reference to the attached SpriteRenderer.
     private SpriteRenderer spriteRenderer;      
@@ -24,16 +24,16 @@ public class Wall : MonoBehaviour
     // DamageWall is called when the player attacks a wall.
     public void DamageWall (int loss)
     {   
-        SoundManager.instance.RandomizeSfx(chopSound1, chopSound2);
+        SoundManager.Instance.RandomizeSfx(ChopSound1, ChopSound2);
         
         // Set spriteRenderer to the damaged wall sprite.
-        spriteRenderer.sprite = dmgSprite;
+        spriteRenderer.sprite = DmgSprite;
         
         // Subtract loss from hit point total.
-        hp -= loss;
+        HP -= loss;
         
         // If hit points are less than or equal to zero.
-        if(hp <= 0)
+        if(HP <= 0)
             // Disable the gameObject.
             gameObject.SetActive (false);
     }

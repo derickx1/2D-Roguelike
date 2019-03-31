@@ -6,15 +6,15 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource efxSource;
     public AudioSource musicSource;
-    public static SoundManager instance = null;
+    public static SoundManager Instance = null;
     public float lowPitchRange = .95f;
     public float highPitchRange = 1.05f;
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
             Destroy (gameObject);
 
         DontDestroyOnLoad(gameObject); 

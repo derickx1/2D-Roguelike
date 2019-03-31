@@ -21,7 +21,7 @@ public class Enemy : MovingObject
     // Start overrides the virtual Start function of the base class.
     protected override void Start ()
     {   
-        GameManager.instance.AddEnemyToList(this);
+        GameManager.Instance.AddEnemyToList(this);
         // Get and store a reference to the attached Animator component.
         animator = GetComponent<Animator> ();
         
@@ -90,6 +90,6 @@ public class Enemy : MovingObject
         // Set the attack trigger of animator to trigger Enemy attack animation.
         animator.SetTrigger ("enemyAttack");
 
-        SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
+        SoundManager.Instance.RandomizeSfx(enemyAttack1, enemyAttack2);
     }
 }
