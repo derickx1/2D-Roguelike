@@ -1,40 +1,37 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine.Assertions;
+using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Wall : MonoBehaviour
 {             
-    // Alternate sprite to display after Wall has been attacked by player. 
-    public Sprite DmgSprite;          
-    // Hit points for the wall.          
-    public int HP = 5;                          
-    public AudioClip ChopSound1;
-    public AudioClip ChopSound2;
-
-    // Store a component reference to the attached SpriteRenderer.
-    private SpriteRenderer spriteRenderer;      
-    
+    [SerializeField]
+    private Sprite damageSprite;                
+    [SerializeField]
+    private int HP = 5;                          
+    [SerializeField]
+    private AudioClip chopSound1;
+    [SerializeField]
+    private AudioClip chopSound2;
+    private SpriteRenderer spriteRenderer;   
     
     void Awake ()
     {
-        // Get a component reference to the SpriteRenderer.
+        Assert.IsNotNull(damageSprite);
+        Assert.IsNotNull(chopSound1);
+        Assert.IsNotNull(chopSound2);
+
         spriteRenderer = GetComponent<SpriteRenderer> ();
+		Assert.IsNotNull(spriteRenderer);
     }
     
-    
-    // DamageWall is called when the player attacks a wall.
     public void DamageWall (int loss)
     {   
-        SoundManager.Instance.RandomizeSfx(ChopSound1, ChopSound2);
-        
-        // Set spriteRenderer to the damaged wall sprite.
-        spriteRenderer.sprite = DmgSprite;
-        
-        // Subtract loss from hit point total.
+        SoundManager.Instance.RandomizeSfx(chopSound1, chopSound2);
+        spriteRenderer.sprite = damageSprite;
+
         HP -= loss;
-        
-        // If hit points are less than or equal to zero.
         if(HP <= 0)
-            // Disable the gameObject.
             gameObject.SetActive (false);
     }
 }
