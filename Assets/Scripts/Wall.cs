@@ -15,7 +15,7 @@ public class Wall : MonoBehaviour
     private AudioClip chopSound2;
     private SpriteRenderer spriteRenderer;   
     
-    void Awake ()
+    private void Awake ()
     {
         Assert.IsNotNull(damageSprite);
         Assert.IsNotNull(chopSound1);

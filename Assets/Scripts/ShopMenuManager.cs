@@ -39,7 +39,7 @@ public class ShopMenuManager : MonoBehaviour
 		public static string FoodPreservationMaxLevelText => $"Food Preservation Max Level";
 	}
 
-    void Start()
+    private void Start()
     {
         Assert.IsNotNull(mainMenu);
 

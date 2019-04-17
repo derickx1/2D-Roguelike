@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 	[HideInInspector] 
     public bool FreezePlayer = true;	
 
-    void Awake ()
+    private void Awake ()
     { 
         Assert.IsNotNull(levelText);
 
@@ -88,7 +88,7 @@ public class GameManager : Singleton<GameManager>
 		shopMenu.SetActive(true);
 	}
 
-    void Update()
+    private void Update()
     {
         if(PlayersTurn || enemiesMoving || FreezePlayer)
             {
