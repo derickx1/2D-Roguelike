@@ -114,7 +114,7 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(turnDelay);
         }
         
-        for (var i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].MoveEnemy ();    
             yield return new WaitForSeconds(enemies[i].MoveTime);

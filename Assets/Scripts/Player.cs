@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Player : MovingObject
 {
-    private static int coins;
-	private static int wallDamage;
-	private static int foodDamage;
     [SerializeField]
     private int defaultFood = 100;
 	[SerializeField]                  
@@ -40,41 +37,9 @@ public class Player : MovingObject
 	private AudioClip gameOverSound;                 
     private Animator animator;
 
-	public static int Coins
-	{
-		get
-		{
-			return coins;
-		}
-		set
-		{
-			coins = value;
-		}
-	}
-
-    public static int WallDamage
-	{
-		get
-		{
-			return wallDamage;
-		}
-		set
-		{
-			wallDamage = value;
-		}
-	}
-
-    public static int FoodDamage
-	{
-		get
-		{
-			return foodDamage;
-		}
-		set
-		{
-			foodDamage = value;	
-		}
-	}
+    public static int Coins;
+    public static int WallDamage;
+    public static int FoodDamage;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     // Used to store location of screen touch origin for mobile controls.
@@ -99,18 +64,12 @@ public class Player : MovingObject
         animator = GetComponent<Animator>();
         Assert.IsNotNull(animator);
 
-        coins = SaveManager.Coins;
-        wallDamage = SaveManager.WallDamage;
-        foodDamage = SaveManager.FoodDamage;
+        Coins = SaveManager.Coins;
+        WallDamage = SaveManager.WallDamage;
+        FoodDamage = SaveManager.FoodDamage;
         food = defaultFood;
         foodText.text = $"Food: {food}";
         base.Start ();
-    }
-	
-    public void UpdateStats()
-    {
-        WallDamage = PlayerPrefs.GetInt("WallDamage", 1);
-        FoodDamage = PlayerPrefs.GetInt("FoodDamage", 5);
     }
     
     private void Update ()
